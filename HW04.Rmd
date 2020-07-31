@@ -73,7 +73,7 @@ gun_deaths %>%
     group_by(intent) %>%
     count() %>%
 
-    ggplot(aes(x = intent, y = n)) +
+    ggplot(aes(x = reorder(intent, -n), y = n)) +
     geom_col(fill = "grey50") +
     
     labs(
@@ -186,6 +186,12 @@ kable(
 (hint maybe looking at percentages would be good)
 ```{r race_2}
 
+x <- deaths_by_race %>%
+  ungroup() %>%
+  group_by(race) %>%
+  mutate(homicide_percent = 100*n / sum(n))
+  
+  x
     
 ```
 
